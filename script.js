@@ -1,37 +1,32 @@
 // module entry
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
 import {
   getDatabase, ref, set, push, remove, onValue, update
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 /* Config Database Barang */
 const firebaseConfigBarang = {
-  apiKey: "AIzaSyAXwrQEVJpDXSsWSF-QEcEtwzl08khw_YI",
-  authDomain: "stok-barang-d9ea6.firebaseapp.com",
-  databaseURL: "https://stok-barang-d9ea6-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "stok-barang-d9ea6",
-  storageBucket: "stok-barang-d9ea6.firebasestorage.app",
-  messagingSenderId: "761724837703",
-  appId: "1:761724837703:web:d67a7a537fd81972317662",
-  measurementId: "G-VBDWX1E7H3"
-};
-
-/* Config Database Alat */
-const firebaseConfigAlat = {
-  apiKey: "AIzaSyCaOQPlCQ8oBNp1H2I1Frf6dN5lUmzBGN4",
-  authDomain: "stok-alat.firebaseapp.com",
-  databaseURL: "https://stok-alat-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "stok-alat",
-  storageBucket: "stok-alat.firebasestorage.app",
-  messagingSenderId: "725607746091",
-  appId: "1:725607746091:web:284c62588307ce7fb4f86e",
-  measurementId: "G-BSZY4KFF0C"
+  apiKey: "AIzaSyCfW2OeJaNhR5G5tHaslEtKLqqC0BSj5dQ",
+  authDomain: "penelitian-ilmiah-b696a.firebaseapp.com",
+  databaseURL: "https://penelitian-ilmiah-b696a-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "penelitian-ilmiah-b696a",
+  storageBucket: "penelitian-ilmiah-b696a.firebasestorage.app",
+  messagingSenderId: "299686074696",
+  appId: "1:299686074696:web:b14683baa5a37ee46b7b7d",
+  measurementId: "G-HSM23MEME3"
 };
 
 /* initialize two apps with names */
 const appBarang = initializeApp(firebaseConfigBarang, "appBarang");
 const analyticsBarang = getAnalytics(appBarang);
+const auth = getAuth(appBarang);
 const dbBarang = getDatabase(appBarang);
 
 const appAlat = initializeApp(firebaseConfigAlat, "appAlat");
@@ -41,10 +36,7 @@ const dbAlat = getDatabase(appAlat);
 /* =======================================================
    LOGIN CONFIG
 ======================================================= */
-const CREDENTIALS = {
-  username: "admin",
-  password: "gudangtap"
-};
+
 
 let currentRole = null; // 'admin' | 'guest'
 
@@ -136,14 +128,30 @@ const pageAlat = document.getElementById("pageAlat");
 /* =======================================================
    LOGIN & UI
 ======================================================= */
-btnLogin.addEventListener("click", () => {
-  const u = (loginUsername.value || "").trim();
-  const p = (loginPassword.value || "").trim();
-  if (u === CREDENTIALS.username && p === CREDENTIALS.password) {
+btnLogin.addEventListener("click", async () => {
+  const email = (loginUsername.value || "").trim();
+  const password = (loginPassword.value || "").trim();
+
+  if (!email || !password) {
+    alert("Email dan password wajib diisi.");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    alert("Login gagal: " + err.message);
+  }
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
     currentRole = "admin";
     afterLogin();
   } else {
-    alert("Username atau password salah.");
+    currentRole = null;
+    loginCard.style.display = "block";
+    appRoot.style.display = "none";
   }
 });
 
@@ -171,11 +179,7 @@ function afterLogin() {
 /* logout simple (reset UI) */
 btnLogout.addEventListener("click", () => {
   if (!confirm("Logout sekarang?")) return;
-  currentRole = null;
-  loginUsername.value = "";
-  loginPassword.value = "";
-  loginCard.style.display = "block";
-  appRoot.style.display = "none";
+  signOut(auth);
 });
 
 /* switch halaman */
