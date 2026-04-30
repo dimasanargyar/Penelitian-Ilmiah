@@ -4,6 +4,12 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebas
 import {
   getDatabase, ref, set, push, remove, onValue, update
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 /* Config Database Barang */
 const firebaseConfigBarang = {
@@ -31,8 +37,22 @@ const firebaseConfigAlat = {
 
 /* initialize two apps with names */
 const appBarang = initializeApp(firebaseConfigBarang, "appBarang");
+const auth = getAuth(appBarang);
 const analyticsBarang = getAnalytics(appBarang);
 const dbBarang = getDatabase(appBarang);
+const auth = getAuth(appBarang);
+
+// AUTO LOGIN (WAJIB)
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    currentRole = "admin";
+    afterLogin();
+  } else {
+    currentRole = null;
+    loginCard.style.display = "block";
+    appRoot.style.display = "none";
+  }
+});
 
 const appAlat = initializeApp(firebaseConfigAlat, "appAlat");
 const analyticsAlat = getAnalytics(appAlat);
@@ -41,10 +61,6 @@ const dbAlat = getDatabase(appAlat);
 /* =======================================================
    LOGIN CONFIG
 ======================================================= */
-const CREDENTIALS = {
-  username: "admin",
-  password: "gudangtap"
-};
 
 let currentRole = null; // 'admin' | 'guest'
 
@@ -137,14 +153,17 @@ const pageAlat = document.getElementById("pageAlat");
    LOGIN & UI
 ======================================================= */
 btnLogin.addEventListener("click", () => {
-  const u = (loginUsername.value || "").trim();
-  const p = (loginPassword.value || "").trim();
-  if (u === CREDENTIALS.username && p === CREDENTIALS.password) {
-    currentRole = "admin";
-    afterLogin();
-  } else {
-    alert("Username atau password salah.");
-  }
+  const email = loginUsername.value;
+  const password = loginPassword.value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      currentRole = "admin"; // sementara tetap admin
+      afterLogin();
+    })
+    .catch((error) => {
+      alert("Login gagal: " + error.message);
+    });
 });
 
 btnGuest.addEventListener("click", () => {
@@ -170,12 +189,11 @@ function afterLogin() {
 
 /* logout simple (reset UI) */
 btnLogout.addEventListener("click", () => {
-  if (!confirm("Logout sekarang?")) return;
-  currentRole = null;
-  loginUsername.value = "";
-  loginPassword.value = "";
-  loginCard.style.display = "block";
-  appRoot.style.display = "none";
+  signOut(auth).then(() => {
+    currentRole = null;
+    loginCard.style.display = "block";
+    appRoot.style.display = "none";
+  });
 });
 
 /* switch halaman */
