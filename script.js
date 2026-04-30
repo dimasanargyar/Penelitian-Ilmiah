@@ -3,30 +3,35 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/fireba
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
 import {
   getDatabase, ref, set, push, remove, onValue, update
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
 
 /* Config Database Barang */
 const firebaseConfigBarang = {
-  apiKey: "AIzaSyCfW2OeJaNhR5G5tHaslEtKLqqC0BSj5dQ",
-  authDomain: "penelitian-ilmiah-b696a.firebaseapp.com",
-  databaseURL: "https://penelitian-ilmiah-b696a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "penelitian-ilmiah-b696a",
-  storageBucket: "penelitian-ilmiah-b696a.firebasestorage.app",
-  messagingSenderId: "299686074696",
-  appId: "1:299686074696:web:b14683baa5a37ee46b7b7d",
-  measurementId: "G-HSM23MEME3"
+  apiKey: "AIzaSyDvaODMK4sLyLkclEp29JBWCI100bctII0",
+  authDomain: "pi-barang.firebaseapp.com",
+  databaseURL: "https://pi-barang-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "pi-barang",
+  storageBucket: "pi-barang.firebasestorage.app",
+  messagingSenderId: "1374610989",
+  appId: "1:1374610989:web:0d35285e9c868a7ea8faa4",
+  measurementId: "G-3LWVBPGNGT"
+};
+
+/* Config Database Alat */
+const firebaseConfigAlat = {
+  apiKey: "AIzaSyBfaKu155uy0ddui4Xq9e5fhPtHcEiNTAo",
+  authDomain: "pi-alat.firebaseapp.com",
+  databaseURL: "https://pi-alat-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "pi-alat",
+  storageBucket: "pi-alat.firebasestorage.app",
+  messagingSenderId: "587198376954",
+  appId: "1:587198376954:web:3c1185ace9c3005ff01243",
+  measurementId: "G-8EZ9HBQYY1"
 };
 
 /* initialize two apps with names */
 const appBarang = initializeApp(firebaseConfigBarang, "appBarang");
 const analyticsBarang = getAnalytics(appBarang);
-const auth = getAuth(appBarang);
 const dbBarang = getDatabase(appBarang);
 
 const appAlat = initializeApp(firebaseConfigAlat, "appAlat");
@@ -36,7 +41,10 @@ const dbAlat = getDatabase(appAlat);
 /* =======================================================
    LOGIN CONFIG
 ======================================================= */
-
+const CREDENTIALS = {
+  username: "admin",
+  password: "gudangtap"
+};
 
 let currentRole = null; // 'admin' | 'guest'
 
@@ -128,30 +136,14 @@ const pageAlat = document.getElementById("pageAlat");
 /* =======================================================
    LOGIN & UI
 ======================================================= */
-btnLogin.addEventListener("click", async () => {
-  const email = (loginUsername.value || "").trim();
-  const password = (loginPassword.value || "").trim();
-
-  if (!email || !password) {
-    alert("Email dan password wajib diisi.");
-    return;
-  }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    alert("Login gagal: " + err.message);
-  }
-});
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
+btnLogin.addEventListener("click", () => {
+  const u = (loginUsername.value || "").trim();
+  const p = (loginPassword.value || "").trim();
+  if (u === CREDENTIALS.username && p === CREDENTIALS.password) {
     currentRole = "admin";
     afterLogin();
   } else {
-    currentRole = null;
-    loginCard.style.display = "block";
-    appRoot.style.display = "none";
+    alert("Username atau password salah.");
   }
 });
 
@@ -179,7 +171,11 @@ function afterLogin() {
 /* logout simple (reset UI) */
 btnLogout.addEventListener("click", () => {
   if (!confirm("Logout sekarang?")) return;
-  signOut(auth);
+  currentRole = null;
+  loginUsername.value = "";
+  loginPassword.value = "";
+  loginCard.style.display = "block";
+  appRoot.style.display = "none";
 });
 
 /* switch halaman */
