@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/fireba
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
 import {
   getDatabase, ref, set, push, remove, onValue, update
-} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
 /* Config Database Barang */
 const firebaseConfigBarang = {
