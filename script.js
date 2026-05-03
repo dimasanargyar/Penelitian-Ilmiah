@@ -48,7 +48,7 @@ onAuthStateChanged(auth, (user) => {
     afterLogin();
   } else {
     currentRole = null;
-    loginwrapper.style.display = "block";
+    loginCard.style.display = "block";
     appRoot.style.display = "none";
   }
 });
@@ -66,7 +66,7 @@ let currentRole = null; // 'admin' | 'guest'
 /* =======================================================
    DOM ELEMENTS (global)
 ======================================================= */
-const loginwrapper = document.getElementById("loginwrapper");
+const loginCard = document.getElementById("loginCard");
 const appRoot = document.getElementById("app");
 const loginUsername = document.getElementById("loginUsername");
 const loginPassword = document.getElementById("loginPassword");
@@ -179,7 +179,7 @@ if (togglePassword) {
 }
 
 function afterLogin() {
-  loginwrapper.style.display = "none";
+  loginCard.style.display = "none";
   appRoot.style.display = "block";
   // default halaman: Barang
   showPage("barang");
@@ -190,7 +190,7 @@ function afterLogin() {
 btnLogout.addEventListener("click", () => {
   signOut(auth).then(() => {
     currentRole = null;
-    loginwrapper.style.display = "block";
+    loginCard.style.display = "block";
     appRoot.style.display = "none";
   });
 });
@@ -291,7 +291,7 @@ barang_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormBarang();
+      resetFormInput();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
@@ -499,17 +499,17 @@ alat_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormAlat();
+      resetFormInputs();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
 
 alat_btnReset.addEventListener("click", () => {
-  resetFormAlat();
+  resetFormInputs();
   editMode = null;
 });
 
-function resetFormAlat() {
+function resetFormInputs() {
   alat_inputNama.value = "";
   alat_inputSpesifikasi.value = "";
   alat_inputJumlah.value = "";
