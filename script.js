@@ -165,7 +165,6 @@ btnLogin.addEventListener("click", () => {
     .catch((error) => {
       alert("Login gagal: " + error.message);
     });
-});
 
 btnGuest.addEventListener("click", () => {
   loginWrapper.style.display = "none";
