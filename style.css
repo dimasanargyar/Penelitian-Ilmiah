@@ -15,16 +15,17 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   overflow-x: hidden;
 }
 
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
   background: var(--bg);
   color: #111;
   margin: 0;
-  padding: 18px;
+  padding: 0;
 }
 
 h1 { margin: 0 0 4px 0; font-size: 20px; }
@@ -37,6 +38,10 @@ h2 { margin: 0 0 8px 0; font-size: 16px; }
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   margin-bottom: 14px;
   width: 100%;
+  max-width: 100%;
+}
+
+.pageCard .card {
   max-width: 100%;
 }
 
@@ -112,6 +117,13 @@ button[disabled] {
 .smallBtn.secondary { background: #6b7280; }
 
 /* ========== GRID ========== */
+.login-card .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -125,7 +137,7 @@ table {
   min-width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 th, td {
@@ -174,4 +186,111 @@ th {
 
   .topbar { flex-direction: column; gap:8px; align-items: stretch; }
   .top-right { justify-content:flex-end; }
+}
+
+/* ========== LOGIN CENTER LAYOUT ========== */
+.login-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #cfcfcf;
+}
+
+/* card khusus login */
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  padding: 28px;
+  border-radius: 10px;
+  text-align: center;
+  background: #f1f1f1;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.15);
+}
+
+/* header login */
+.login-header {
+  margin-bottom: 18px;
+}
+
+.login-logo {
+  width: 180px;
+  margin-bottom: 6px;
+}
+
+.login-header h2 {
+  font-family: "Times New Roman", serif;
+  font-size: 30px;
+  margin-top: 10px;
+  letter-spacing: 2px;
+}
+
+/* input biar rapi */
+.login-card input {
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #9e9e9e;
+  background: #fff;
+}
+
+/* tombol bawah jadi sejajar */
+.login-card .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.login-card .actions button {
+  width: 48%;
+  padding: 10px;
+  background: #e6e6e6;
+  color: #000;
+  border: 1px solid #9e9e9e;
+  font-weight: normal;
+}
+
+/* hover biar hidup sedikit */
+.login-card .actions button:hover {
+  background: #d0d0d0;
+}
+
+.login-card .smallBtn {
+  background: #e0e0e0;
+  color: #000;
+}
+
+.login-card label {
+  text-align: left;
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.pageCard {
+  margin-top: 16px;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #1976d2;
 }
