@@ -45,11 +45,10 @@ const dbBarang = getDatabase(appBarang);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     currentRole = "admin";
-    loginWrapper.style.display = "none";
-    appRoot.style.display = "block";
     afterLogin();
   } else {
     currentRole = null;
+    loginCard.style.display = "block";
     appRoot.style.display = "none";
   }
 });
@@ -68,7 +67,6 @@ let currentRole = null; // 'admin' | 'guest'
    DOM ELEMENTS (global)
 ======================================================= */
 const loginCard = document.getElementById("loginCard");
-const loginWrapper = document.querySelector(".login-wrapper");
 const appRoot = document.getElementById("app");
 const loginUsername = document.getElementById("loginUsername");
 const loginPassword = document.getElementById("loginPassword");
@@ -158,17 +156,18 @@ btnLogin.addEventListener("click", () => {
   const password = loginPassword.value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      loginWrapper.style.display = "none";
-      appRoot.style.display = "block";
+    .then((userCredential) => {
+      currentRole = "admin"; // sementara tetap admin
+      afterLogin();
     })
     .catch((error) => {
       alert("Login gagal: " + error.message);
     });
+});
 
 btnGuest.addEventListener("click", () => {
-  loginWrapper.style.display = "none";
-  appRoot.style.display = "block";
+  currentRole = "guest";
+  afterLogin();
 });
 
 if (togglePassword) {
@@ -180,7 +179,7 @@ if (togglePassword) {
 }
 
 function afterLogin() {
-  loginWrapper.style.display = "none";
+  loginCard.style.display = "none";
   appRoot.style.display = "block";
   // default halaman: Barang
   showPage("barang");
@@ -189,9 +188,12 @@ function afterLogin() {
 
 /* logout simple (reset UI) */
 btnLogout.addEventListener("click", () => {
-  loginWrapper.style.display = "flex";
+  signOut(auth).then(() => {
+    currentRole = null;
+    loginCard.style.display = "block";
     appRoot.style.display = "none";
   });
+});
 
 /* switch halaman */
 btnSwitch.addEventListener("click", () => {
@@ -289,7 +291,7 @@ barang_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormBarang();
+      resetFormInput();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
@@ -497,17 +499,17 @@ alat_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormBarang();
+      resetFormInputs();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
 
 alat_btnReset.addEventListener("click", () => {
-  resetFormBarang();
+  resetFormInputs();
   editMode = null;
 });
 
-function resetFormBarang() {
+function resetFormInputs() {
   alat_inputNama.value = "";
   alat_inputSpesifikasi.value = "";
   alat_inputJumlah.value = "";
