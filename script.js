@@ -40,7 +40,6 @@ const appBarang = initializeApp(firebaseConfigBarang, "appBarang");
 const auth = getAuth(appBarang);
 const analyticsBarang = getAnalytics(appBarang);
 const dbBarang = getDatabase(appBarang);
-const auth = getAuth(appBarang);
 
 // AUTO LOGIN (WAJIB)
 onAuthStateChanged(auth, (user) => {
