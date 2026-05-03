@@ -291,7 +291,7 @@ barang_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormInput();
+      resetFormBarang();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
@@ -499,13 +499,13 @@ alat_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormInputs();
+      resetFormBarang();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
 
 alat_btnReset.addEventListener("click", () => {
-  resetFormInputs();
+  resetFormBarang();
   editMode = null;
 });
 
