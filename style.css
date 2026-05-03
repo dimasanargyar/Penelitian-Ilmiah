@@ -175,3 +175,69 @@ th {
   .topbar { flex-direction: column; gap:8px; align-items: stretch; }
   .top-right { justify-content:flex-end; }
 }
+
+/* ========== LOGIN PAGE (ISOLATED) ========== */
+
+/* Hilangkan padding body saat login */
+.login-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  z-index: 1000;
+}
+
+/* KIRI (GAMBAR) */
+.login-left {
+  flex: 1.2;
+  background: url('gudang.jpg') no-repeat center;
+  background-size: cover;
+
+  /* diagonal */
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+}
+
+/* KANAN */
+.login-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f6f8;
+  padding: 40px;
+}
+
+/* KHUSUS LOGIN CARD */
+#loginCard {
+  max-width: 360px;
+  width: 100%;
+  padding: 28px;
+  border-radius: 10px;
+}
+
+/* Grid login jadi 1 kolom */
+.login-grid {
+  grid-template-columns: 1fr !important;
+}
+
+/* Password wrapper */
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  color: #1976d2;
+  font-size: 12px;
+  padding: 0;
+}
+
+/* Judul login */
+#loginCard h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
