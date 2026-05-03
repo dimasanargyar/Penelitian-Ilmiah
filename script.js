@@ -48,7 +48,7 @@ onAuthStateChanged(auth, (user) => {
     afterLogin();
   } else {
     currentRole = null;
-    loginCard.style.display = "block";
+    loginwrapper.style.display = "block";
     appRoot.style.display = "none";
   }
 });
@@ -66,7 +66,7 @@ let currentRole = null; // 'admin' | 'guest'
 /* =======================================================
    DOM ELEMENTS (global)
 ======================================================= */
-const loginCard = document.getElementById("loginCard");
+const loginwrapper = document.getElementById("loginwrapper");
 const appRoot = document.getElementById("app");
 const loginUsername = document.getElementById("loginUsername");
 const loginPassword = document.getElementById("loginPassword");
@@ -179,7 +179,7 @@ if (togglePassword) {
 }
 
 function afterLogin() {
-  loginCard.style.display = "none";
+  loginwrapper.style.display = "none";
   appRoot.style.display = "block";
   // default halaman: Barang
   showPage("barang");
@@ -190,7 +190,7 @@ function afterLogin() {
 btnLogout.addEventListener("click", () => {
   signOut(auth).then(() => {
     currentRole = null;
-    loginCard.style.display = "block";
+    loginwrapper.style.display = "block";
     appRoot.style.display = "none";
   });
 });
