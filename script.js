@@ -193,7 +193,6 @@ btnLogout.addEventListener("click", () => {
   loginWrapper.style.display = "flex";
     appRoot.style.display = "none";
   });
-});
 
 /* switch halaman */
 btnSwitch.addEventListener("click", () => {
