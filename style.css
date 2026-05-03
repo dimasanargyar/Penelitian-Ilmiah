@@ -175,3 +175,106 @@ th {
   .topbar { flex-direction: column; gap:8px; align-items: stretch; }
   .top-right { justify-content:flex-end; }
 }
+
+/* ================= LOGIN ONLY (OVERRIDE) ================= */
+
+/* Center hanya saat login tampil */
+body:has(#loginCard) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Card login */
+#loginCard {
+  max-width: 360px;
+  background: #dcdcdc;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+/* Header */
+.login-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 45px;
+}
+
+.company h2 {
+  font-size: 14px;
+  color: #1a2a6c;
+  margin: 0;
+}
+
+.company p {
+  font-size: 10px;
+  color: #444;
+  margin: 0;
+}
+
+/* Title */
+.login-title {
+  text-align: center;
+  margin: 15px 0 20px;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+/* Grid jadi vertikal */
+#loginCard .grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Input */
+#loginCard input {
+  margin-bottom: 0;
+}
+
+/* Toggle password */
+#togglePassword {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Button login */
+#btnLogin {
+  flex: 1;
+  background: #eee;
+  color: #000;
+  border: 1px solid #aaa;
+}
+
+/* Button guest */
+#btnGuest {
+  flex: 1;
+  background: #eee;
+  color: #000;
+  border: 1px solid #aaa;
+}
+
+/* Actions sejajar */
+#loginCard .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Hover */
+#btnLogin:hover,
+#btnGuest:hover {
+  background: #d5d5d5;
+}
