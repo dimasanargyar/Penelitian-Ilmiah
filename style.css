@@ -27,37 +27,6 @@ body {
   padding: 18px;
 }
 
-.container {
-  display: flex;
-  height: 100px;
-}
-
-.left {
-  width: 60%;
-}
-
-.left img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.right {
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #f4f4f4;
-
-  /* efek miring */
-  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-}
-
-.login-box {
-  width: 80%;
-  max-width: 350px;
-}
-
 h1 { margin: 0 0 4px 0; font-size: 20px; }
 h2 { margin: 0 0 8px 0; font-size: 16px; }
 
