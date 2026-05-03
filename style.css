@@ -112,9 +112,9 @@ button[disabled] {
 .smallBtn.secondary { background: #6b7280; }
 
 /* ========== GRID ========== */
-.grid {
+.login-card .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 12px;
   width: 100%;
 }
@@ -174,4 +174,50 @@ th {
 
   .topbar { flex-direction: column; gap:8px; align-items: stretch; }
   .top-right { justify-content:flex-end; }
+}
+
+/* ========== LOGIN CENTER LAYOUT ========== */
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* card khusus login */
+.login-card {
+  max-width: 420px;
+  width: 100%;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* header login */
+.login-header {
+  margin-bottom: 16px;
+}
+
+.login-logo {
+  width: 160px;
+  margin-bottom: 8px;
+}
+
+.login-header h2 {
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+/* input biar rapi */
+.login-card input {
+  text-align: left;
+}
+
+/* tombol bawah jadi sejajar */
+.login-card .actions {
+  justify-content: space-between;
+}
+
+.login-card button {
+  width: 48%;
 }
