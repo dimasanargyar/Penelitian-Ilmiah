@@ -67,7 +67,7 @@ let currentRole = null; // 'admin' | 'guest'
    DOM ELEMENTS (global)
 ======================================================= */
 const loginCard = document.getElementById("loginCard");
-const appRoot = document.getElementById("app");
+const app = document.getElementById("app");
 const loginUsername = document.getElementById("loginUsername");
 const loginPassword = document.getElementById("loginPassword");
 const btnLogin = document.getElementById("btnLogin");
