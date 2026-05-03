@@ -45,10 +45,11 @@ const dbBarang = getDatabase(appBarang);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     currentRole = "admin";
+    loginWrapper.style.display = "none";
+    appRoot.style.display = "block";
     afterLogin();
   } else {
     currentRole = null;
-    loginCard.style.display = "block";
     appRoot.style.display = "none";
   }
 });
@@ -67,6 +68,7 @@ let currentRole = null; // 'admin' | 'guest'
    DOM ELEMENTS (global)
 ======================================================= */
 const loginCard = document.getElementById("loginCard");
+const loginWrapper = document.querySelector(".login-wrapper");
 const appRoot = document.getElementById("app");
 const loginUsername = document.getElementById("loginUsername");
 const loginPassword = document.getElementById("loginPassword");
@@ -156,9 +158,9 @@ btnLogin.addEventListener("click", () => {
   const password = loginPassword.value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      currentRole = "admin"; // sementara tetap admin
-      afterLogin();
+    .then(() => {
+      loginWrapper.style.display = "none";
+      appRoot.style.display = "block";
     })
     .catch((error) => {
       alert("Login gagal: " + error.message);
@@ -166,8 +168,8 @@ btnLogin.addEventListener("click", () => {
 });
 
 btnGuest.addEventListener("click", () => {
-  currentRole = "guest";
-  afterLogin();
+  loginWrapper.style.display = "none";
+  appRoot.style.display = "block";
 });
 
 if (togglePassword) {
@@ -179,7 +181,7 @@ if (togglePassword) {
 }
 
 function afterLogin() {
-  loginCard.style.display = "none";
+  loginWrapper.style.display = "none";
   appRoot.style.display = "block";
   // default halaman: Barang
   showPage("barang");
@@ -188,9 +190,7 @@ function afterLogin() {
 
 /* logout simple (reset UI) */
 btnLogout.addEventListener("click", () => {
-  signOut(auth).then(() => {
-    currentRole = null;
-    loginCard.style.display = "block";
+  loginWrapper.style.display = "flex";
     appRoot.style.display = "none";
   });
 });
@@ -291,7 +291,7 @@ barang_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormInput();
+      resetFormBarang();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
@@ -499,17 +499,17 @@ alat_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormInputs();
+      resetFormBarang();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
 
 alat_btnReset.addEventListener("click", () => {
-  resetFormInputs();
+  resetFormBarang();
   editMode = null;
 });
 
-function resetFormInputs() {
+function resetFormBarang() {
   alat_inputNama.value = "";
   alat_inputSpesifikasi.value = "";
   alat_inputJumlah.value = "";
