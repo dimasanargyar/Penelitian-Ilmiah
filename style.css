@@ -182,6 +182,7 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: -18px;
 }
 
 /* card khusus login */
