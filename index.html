@@ -3,44 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - PT Tuntas Aji Pratama</title>
+  <title>Monitoring Stok Alat dan Barang</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="Logo_TAP.png">
 </head>
-
 <body>
 
-<!-- LOGIN PAGE -->
-<div class="login-container">
-
-  <!-- LEFT IMAGE -->
-  <div class="login-left"></div>
-
-  <!-- RIGHT FORM -->
-  <div class="login-right">
-
-    <div class="login-box">
-
-      <img src="Logo_TAP.png" class="logo" />
-
-      <h1>LOGIN</h1>
-
-      <label>Username</label>
-      <input type="text" id="loginUsername" placeholder="Username">
-
-      <label>Password</label>
-      <div class="password-box">
-        <input type="password" id="loginPassword" placeholder="Password">
-        <span id="togglePassword">Show</span>
+  <!-- CARD LOGIN -->
+  <div class="card" id="loginCard">
+    <h1>Masuk</h1>
+    <div class="grid">
+      <div>
+        <label>Username</label>
+        <input type="text" id="loginUsername" placeholder="Username" />
       </div>
-
-      <button id="btnLogin" class="btn-main">Login</button>
-      <button id="btnGuest" class="btn-secondary">Guest</button>
-
+      <div>
+        <label>Password</label>
+        <div style="position:relative;">
+          <input type="password" id="loginPassword" placeholder="Password" />
+          <button type="button" id="togglePassword"
+            style="position:absolute; right:8px; top:50%; transform:translateY(-50%);
+                   background:none; border:none; cursor:pointer; font-size:12px; color:#1976d2;">
+            🔴
+          </button>
+        </div>
+      </div>
+      <div>
+        <label>&nbsp;</label>
+        <button id="btnLogin">Login</button>
+      </div>
     </div>
-
+    <div class="actions">
+      <button id="btnGuest" class="smallBtn secondary">Masuk sebagai Tamu</button>
+    </div>
   </div>
-
-</div>
 
   <!-- APP ROOT -->
   <div id="app" style="display:none;">
