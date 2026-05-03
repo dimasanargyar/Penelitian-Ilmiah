@@ -23,13 +23,10 @@ body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   background: var(--bg);
   color: #111;
-  margin: 0;
   padding: 18px;
 }
 
-h1 { margin: 0 0 4px 0; font-size: 20px; }
-h2 { margin: 0 0 8px 0; font-size: 16px; }
-
+/* ========== CARD (DASHBOARD) ========== */
 .card {
   background: var(--card);
   padding: 14px;
@@ -37,19 +34,9 @@ h2 { margin: 0 0 8px 0; font-size: 16px; }
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   margin-bottom: 14px;
   width: 100%;
-  max-width: 100%;
 }
 
-/* TOPBAR */
-.topbar {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.top-right { display:flex; gap:8px; align-items:center; }
-
-/* ========== FORM INPUTS ========== */
+/* ========== FORM INPUT ========== */
 input[type="text"],
 input[type="number"],
 input[type="date"],
@@ -62,21 +49,9 @@ input[type="password"] {
   border: 1px solid #d0d7de;
   border-radius: 6px;
   font-size: 14px;
-  background: #fff;
-  color: #111;
 }
 
-/* search bars */
-#barang_searchBar,
-#barang_searchStok,
-#alat_searchBar,
-#alat_searchStok {
-  max-width: 420px;
-  width: 100%;
-  display: block;
-}
-
-/* ========== BUTTONS ========== */
+/* ========== BUTTON ========== */
 button {
   padding: 8px 12px;
   border-radius: 8px;
@@ -87,53 +62,36 @@ button {
   font-weight: 600;
 }
 
-button[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
-
 .smallBtn {
   padding: 6px 8px;
   border-radius: 6px;
   background: #ef4444;
   color: #fff;
   border: none;
-  cursor: pointer;
-  font-weight: 600;
 }
 
-.smallBtn.secondary { background: #6b7280; }
+.smallBtn.secondary {
+  background: #6b7280;
+}
 
 /* ========== GRID ========== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  width: 100%;
 }
 
-/* ========== TABLE (FULL WIDTH DESKTOP) ========== */
+/* ========== TABLE ========== */
 table {
   width: 100%;
-  min-width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  table-layout: fixed;
 }
 
 th, td {
   padding: 10px;
   border: 1px solid #e3e7ea;
   text-align: center;
-  font-size: 14px;
-  overflow-wrap: anywhere;
 }
 
 th {
@@ -141,37 +99,123 @@ th {
   color: #fff;
 }
 
-/* ========== MODAL ========== */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
+/* ========== LOGIN OVERRIDE ========== */
+
+/* HAPUS efek card lama untuk login */
+#loginCard {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  max-width: none !important;
 }
 
-.modal-content {
-  max-width: 420px;
+/* WRAPPER FULL SCREEN */
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #dcdcdc;
+}
+
+/* CARD LOGIN */
+.login-card {
+  width: 900px;
+  height: 500px;
+  display: flex;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  background: #fff;
+}
+
+/* KIRI (GAMBAR) */
+.login-left {
+  width: 55%;
+  background: url("gudang.jpg") center/cover no-repeat;
+}
+
+/* KANAN (FORM + DIAGONAL) */
+.login-right {
+  width: 45%;
+  background: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* efek miring */
+  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+/* BOX FORM */
+.login-box {
+  width: 260px;
+}
+
+/* LOGO */
+.logo {
+  width: 180px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+/* TITLE */
+.login-box h2 {
+  text-align: center;
+  font-family: serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* LABEL */
+.login-box label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* INPUT LOGIN */
+.login-box input {
   width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+/* BUTTON LOGIN */
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #e5e5e5;
+  border: 1px solid #bbb;
+  color: #000;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.btn:hover {
+  background: #dcdcdc;
 }
 
 /* ========== RESPONSIVE ========== */
-@media (max-width: 760px) {
-  .grid { grid-template-columns: 1fr; }
-
-  .card table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+    width: 95%;
+    height: auto;
   }
 
-  .card th,
-  .card td {
-    white-space: nowrap;
+  .login-left {
+    height: 200px;
+    width: 100%;
   }
 
-  .topbar { flex-direction: column; gap:8px; align-items: stretch; }
-  .top-right { justify-content:flex-end; }
+  .login-right {
+    width: 100%;
+    clip-path: none;
+    padding: 20px;
+  }
 }
