@@ -11,44 +11,39 @@
 
   <!-- CARD LOGIN -->
   <div class="card" id="loginCard">
-    <h1>Masuk</h1>
-    <div class="grid">
-      <div>
-        <label>Username</label>
-        <input type="text" id="loginUsername" placeholder="Username" />
-      </div>
-      <div>
-        <label>Password</label>
-        <div style="position:relative;">
-          <input type="password" id="loginPassword" placeholder="Password" />
-          <button type="button" id="togglePassword"
-            style="position:absolute; right:8px; top:50%; transform:translateY(-50%);
-                   background:none; border:none; cursor:pointer; font-size:12px; color:#1976d2;">
-            🔴
-          </button>
-        </div>
-      </div>
-      <div>
-        <label>&nbsp;</label>
-        <button id="btnLogin">Login</button>
-      </div>
-    </div>
-    <div class="actions">
-      <button id="btnGuest" class="smallBtn secondary">Masuk sebagai Tamu</button>
+
+  <!-- HEADER -->
+  <div class="login-header">
+    <img src="Logo_TAP.png" class="logo" />
+    <div class="company">
+      <h2>PT. Tuntas Aji Pratama</h2>
+      <p>General Service, Supplier & Steel Fabrication</p>
     </div>
   </div>
 
-  <!-- APP ROOT -->
-  <div id="app" style="display:none;">
-    <div class="topbar card">
-      <div class="top-left">
-        <h1 id="appTitle">Stok Barang</h1>
-      </div>
-      <div class="top-right">
-        <button id="btnSwitch" class="smallBtn">Switch Halaman → Alat</button>
-        <button id="btnLogout" class="smallBtn secondary">Logout</button>
+  <h1 class="login-title">LOGIN</h1>
+
+  <div class="grid">
+    <div>
+      <label>Username</label>
+      <input type="text" id="loginUsername" />
+    </div>
+
+    <div>
+      <label>Password</label>
+      <div style="position:relative;">
+        <input type="password" id="loginPassword" />
+        <button type="button" id="togglePassword">Show</button>
       </div>
     </div>
+
+    <div class="actions">
+      <button id="btnGuest" class="smallBtn secondary">Guest</button>
+      <button id="btnLogin">Login</button>
+    </div>
+  </div>
+
+</div>
 
     <!-- --- STOK BARANG (default) --- -->
     <div id="pageBarang" class="pageCard">
