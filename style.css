@@ -15,12 +15,13 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   overflow-x: hidden;
 }
 
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
   background: var(--bg);
   color: #111;
   margin: 0;
@@ -37,6 +38,10 @@ h2 { margin: 0 0 8px 0; font-size: 16px; }
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   margin-bottom: 14px;
   width: 100%;
+  max-width: 100%;
+}
+
+.pageCard .card {
   max-width: 100%;
 }
 
@@ -113,8 +118,15 @@ button[disabled] {
 
 /* ========== GRID ========== */
 .login-card .grid {
-  display: block;
+  display: grid;
   grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   width: 100%;
 }
@@ -125,7 +137,7 @@ table {
   min-width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 th, td {
@@ -180,17 +192,16 @@ th {
 .login-wrapper {
   position: fixed;
   inset: 0;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: -18px;
+  background: #cfcfcf;
 }
 
 /* card khusus login */
 .login-card {
-  max-width: 420px;
-  width: 350px;
+  width: 100%;
+  max-width: 360px;
   padding: 28px;
   border-radius: 10px;
   text-align: center;
@@ -231,7 +242,7 @@ th {
   margin-top: 16px;
 }
 
-.login-card button {
+.login-card .actions button {
   width: 48%;
   padding: 10px;
   background: #e6e6e6;
@@ -241,7 +252,7 @@ th {
 }
 
 /* hover biar hidup sedikit */
-.login-card button:hover {
+.login-card .actions button:hover {
   background: #d0d0d0;
 }
 
@@ -255,4 +266,14 @@ th {
   display: block;
   margin-top: 10px;
   font-size: 14px;
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.pageCard {
+  margin-top: 16px;
 }
