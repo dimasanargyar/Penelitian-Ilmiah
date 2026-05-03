@@ -291,7 +291,7 @@ barang_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormInput();
+      resetFormBarang();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
@@ -499,17 +499,17 @@ alat_btnSimpan.addEventListener("click", () => {
     })
     .then(() => {
       alert("✅ Data berhasil disimpan.");
-      resetFormInputs();
+      resetFormAlat();
     })
     .catch(err => console.error("❌ Gagal menyimpan data:", err));
 });
 
 alat_btnReset.addEventListener("click", () => {
-  resetFormInputs();
+  resetFormAlat();
   editMode = null;
 });
 
-function resetFormInputs() {
+function resetFormAlat() {
   alat_inputNama.value = "";
   alat_inputSpesifikasi.value = "";
   alat_inputJumlah.value = "";
